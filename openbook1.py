@@ -4,15 +4,18 @@ def list_ipname_ip(address,netmask,name):
 	return d
 
 l=[]
+name=[]
+add=[]
+netmask=[]
 fout=open("running-config.cfg")
 for interface in fout:
-	l.append(interface.split())
+	l.append(interface.strip().split(" "))
 	#print(l)
 for i in range(len(l)):
-	if l[i] =="nameif":
-		name=l[i+2]
-	elif l[i] == "ip":
-		address=l[i+3]
-		netwmask=l[i++5]
-		print(list_ipname_ip(address,netmask,name)) 
-	
+	if type(l[i]) ==list:
+		if l[i][0]=="nameif":
+			name=l[i][1]
+		elif l[i][0]=="ip":
+			add=l[i][2]
+			netmask=l[i][3]
+			print(list_ipname_ip(add,netmask,name))
