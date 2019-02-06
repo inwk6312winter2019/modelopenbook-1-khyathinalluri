@@ -4,13 +4,20 @@ def list_ipname_ip(address,netmask,name):
 	return d
 
 def interchanging_mask(d):
-	for i in range(len(d)):
-		val=d[i][0]
-		val1=d[i][1]
-		if val == 172 or val== 192:
-			val.replace(val,"10")
-			val1.replace(val1,"255.0.0.0")
-	return d
+		res={}
+		a=list(d.values())
+		k=list(d.keys())
+		val=str(a[0][0])
+		#print(val)
+		val1=a[0][1]
+		#print(val1)
+		val=val.split(".")
+		print(val)
+		if val[0] == "172" or val[0] == "192":
+				val[0]=10
+				val1="255.0.0.0"
+				res[k[0]]=(val,val1)
+		return res
 
 
 l=[]
